@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "sstime",
-    "password": "sstime",
-    "database": "sstime",
-    "host": "localhost:3306",
+    "username": "root",
+    "password": null,
+    "database": "test-shopify",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {

@@ -4,9 +4,19 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
-const basename = path.basename(__filename);
+const fileName  = require('../utils/fileName.js')
+const configurations = require('../config/config.js')
+
+
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+// const config = require(__dirname + '/../config/config.json')[env];
+
+const config = configurations[env];
+// console.log("Aaaaa: ", import.meta.url)
+// const {__filename, __dirname} = fileName(import.meta.url);
+const basename = path.basename(__filename);
+
+
 const db = {};
 
 let sequelize;
