@@ -1,0 +1,18 @@
+const { saveObjectsToFile, getObjectsFromFile } = require('./utils/utils');
+
+// Usage
+
+
+const shop = {
+  name: shopData?.body?.shop?.name,
+  shop_url: shopData?.body?.shop?.domain,
+  shopify_token: client_session.accessToken
+}
+
+// Save objects to files
+saveObjectsToFile('shop.json', shop);
+
+// Get objects from files
+const retrievedToken = getObjectsFromFile('shop.json');
+
+console.log('Retrieved Token:', retrievedToken);
