@@ -11,10 +11,12 @@ const ShopifyAuthController = async (req, res, next) => {
     "/shopify/callback",
     false
   );
+  console.log("authRoute", authRoute, shop);
   res.redirect(authRoute);
 };
 
 const ShopifyCallbackController = async (req, res) => {
+    console.log("ShopifyCallbackController", req.query)
   const client_session = await Shopify.Auth.validateAuthCallback(
     req,
     res,
@@ -35,35 +37,31 @@ const ShopifyCallbackController = async (req, res) => {
     shopify_token: client_session.accessToken,
   };
 
-  const shopExists = getShopByShopUrl(
-    "shop.json",
-    shopData?.body?.shop?.domain
-  );
+//   const shopExists = getShopByShopUrl(
+//     "shop.json",
+//     shopData?.body?.shop?.domain
+//   );
 
-  //   const shopExists = await Shop.findOne({
-  //     where: {
-  //       shop_url: shopData?.body?.shop?.domain,
-  //     },
-  //   });
+    const shopExists = await Shop.findOne({
+      where: {
+        shop_url: shopData?.body?.shop?.domain,
+      },
+    });
   if (shopExists) {
-    updateShopByUrl("shop.json", shopData?.body?.shop?.domain, shopObj);
-    // await Shop.update(
-    //   {
-    //     shopify_token: client_session.accessToken,
-    //   },
-    //   {
-    //     where: {
-    //       shop_url: shop,
-    //     },
-    //   }
-    // );
+    // updateShopByUrl("shop.json", shopData?.body?.shop?.domain, shopObj);
+    await Shop.update(
+      {
+        shopify_token: client_session.accessToken,
+      },
+      {
+        where: {
+          shop_url: shop,
+        },
+      }
+    );
   } else {
-    saveObjectsToFile("shop.json", shopObj);
-    // const newShop = await Shop.create({
-    //   name: shopData?.body?.shop?.name,
-    //   shop_url: shopData?.body?.shop?.domain,
-    //   shopify_token: client_session.accessToken,
-    // });
+    // saveObjectsToFile("shop.json", shopObj);
+    const newShop = await Shop.create(shopObj);
   }
 
   const resp = await Shopify.Webhooks.Registry.register({

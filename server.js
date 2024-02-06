@@ -5,6 +5,8 @@ const app = express();
 const http = require("http");
 const shopifyRoute = require("./routes/shopify.route");
 const error = require("./middlewares/error");
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(
   "/webhooks/app/uninstalled",

@@ -16,9 +16,9 @@ const configurations = {
     dialect: 'mysql',
   },
   production: {
-    username: "sstime",
-    password: "sstime",
-    database: "sstime",
+    username: "admin_sstime",
+    password: "admin_sstime",
+    database: "admin_sstime",
     host: "localhost:3306",
     dialect: 'mysql',
   }
