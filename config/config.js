@@ -19,7 +19,7 @@ const configurations = {
     username: "admin_sstime",
     password: "admin_sstime",
     database: "admin_sstime",
-    host: "localhost:3306",
+    host: "localhost",
     dialect: 'mysql',
   }
 };

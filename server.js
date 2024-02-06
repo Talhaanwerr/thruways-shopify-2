@@ -6,8 +6,10 @@ const http = require("http");
 const shopifyRoute = require("./routes/shopify.route");
 const error = require("./middlewares/error");
 const dotenv = require("dotenv");
+const cookieParser = require('cookie-parser');
 dotenv.config();
 
+app.use(cookieParser());
 app.use(
   "/webhooks/app/uninstalled",
   bodyParser.raw({ type: "application/json" })
